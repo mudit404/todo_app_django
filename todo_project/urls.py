@@ -16,8 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.shortcuts import redirect
+
+# View function for root URL redirect
+def home(request):
+    return redirect('/todos/')  # Redirect to /todos/
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+     path('', home, name='home'),  # Root URL that points to the 'home' view
     path('', include('todo_app.urls')),
 ]
