@@ -18,7 +18,7 @@ class ToDoItemViewSet(viewsets.ModelViewSet):
         """
         Override create to handle tags separately.
         """
-        data = request.data
+        data = request.data.copy()
         tags_data = data.pop('tags', [])
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
