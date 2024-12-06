@@ -1,0 +1,10 @@
+/* Example of custom admin styling */
+body {
+    background-color: #f4f6f9 !important;
+}
+.module h2 {
+    color: #2e8b57 !important;
+}
+.nav-sidebar li a {
+    color: #0000ff !important;
+}
