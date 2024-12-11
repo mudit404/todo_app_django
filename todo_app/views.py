@@ -5,10 +5,12 @@ from rest_framework.permissions import IsAuthenticated
 from .models import ToDoItem, Tag
 from .serializers import ToDoItemSerializer, TagSerializer
 
+
 class ToDoItemViewSet(viewsets.ModelViewSet):
     """
     ViewSet to handle all CRUD operations for ToDoItem
     """
+
     queryset = ToDoItem.objects.all()
     serializer_class = ToDoItemSerializer
     authentication_classes = [BasicAuthentication]
@@ -19,7 +21,7 @@ class ToDoItemViewSet(viewsets.ModelViewSet):
         Override create to handle tags separately.
         """
         data = request.data.copy()
-        tags_data = data.pop('tags', [])
+        tags_data = data.pop("tags", [])
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         todo = serializer.save()
@@ -30,12 +32,18 @@ class ToDoItemViewSet(viewsets.ModelViewSet):
             todo.tags.add(tag)
 
         headers = self.get_success_headers(serializer.data)
-        return Response(self.get_serializer(todo).data, status=status.HTTP_201_CREATED, headers=headers)
+        return Response(
+            self.get_serializer(todo).data,
+            status=status.HTTP_201_CREATED,
+            headers=headers,
+        )
+
 
 class TagViewSet(viewsets.ModelViewSet):
     """
     ViewSet to handle CRUD operations for Tags.
     """
+
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
     authentication_classes = [BasicAuthentication]
