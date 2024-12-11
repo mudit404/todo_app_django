@@ -32,9 +32,9 @@ jobs:
         python manage.py migrate
 
     - name: Run unit tests
-      run: pytest --cov
       env:
-        DJANGO_SETTINGS_MODULE: todo_app.settings
+        DJANGO_SETTINGS_MODULE: todo_project.settings
+      run: pytest --cov
 
     - name: Upload Coverage Report
       uses: actions/upload-artifact@v3
